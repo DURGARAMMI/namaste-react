@@ -55,8 +55,10 @@ body {
 .body {
   padding: 30px;
 }
-.search {
+.filter {
   margin-block: 20px;
+  background-color: #dfdddf;
+  padding: 20px;
 }
 .res-card {
   padding: 20px;
@@ -72,4 +74,13 @@ body {
 
 .res-container {
   display: flex;
+  gap: 20px;
+}
+.top-rated-btn {
+  cursor: pointer;
+  border: none;
+  padding: 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: white;
 }
