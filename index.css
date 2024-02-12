@@ -70,10 +70,12 @@ body {
   flex-direction: column;
   gap: 15px;
   border-radius: 10px;
+  min-width: 32%;
 }
 
 .res-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 .top-rated-btn {

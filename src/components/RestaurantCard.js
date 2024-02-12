@@ -8,18 +8,25 @@ const RestaurantsCard = (props) => {
   // const { resName, cuisines } = props;
 
   const { resData } = props;
-  const { name, id, cuisine, avgRating, time } = resData?.data;
-
+  if (!resData || !resData.info) {
+    return null; // or handle the case where resData is not available
+  }
+  const { name, id, cuisines, avgRating, costForTwo, sla, cloudinaryImageId } =
+    resData?.info;
+  const urlImage =
+    "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+    cloudinaryImageId;
   // console.log(props);
 
   return (
     <div className="res-card" style={styleCard}>
-      <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/f01666ac73626461d7455d9c24005cd4" />
+      <img alt={name} src={urlImage} />
       <h3>{name}</h3>
       <h4>{id}</h4>
-      <h4>{cuisine.join(", ")}</h4>
+      <h4>{cuisines.join(", ")}</h4>
       <h4>{avgRating} stars</h4>
-      <h4>{time / 100} mns</h4>
+      <h4>{costForTwo}</h4>
+      <h4>{sla?.deliveryTime} mns</h4>
     </div>
   );
 };
