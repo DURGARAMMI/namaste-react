@@ -42,8 +42,9 @@ body {
   display: flex;
 }
 .res-card img {
-  width: 50%;
-  object-fit: contain;
+  width: 100%;
+  object-fit: cover;
+  height: 180px;
 }
 .nav-items ul li {
   margin-right: 20px;
@@ -59,6 +60,11 @@ body {
   margin-block: 20px;
   background-color: #dfdddf;
   padding: 20px;
+}
+.filter-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
 }
 .res-card {
   padding: 20px;
@@ -85,4 +91,23 @@ body {
   font-size: 1rem;
   border-radius: 5px;
   background-color: white;
+}
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.shimmer-card {
+  height: 400px;
+  min-width: 32%;
+  width: 320px;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+.btn-login {
+  background-color: #f0f0f0;
+  padding: 5px 20px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
 }
