@@ -84,6 +84,11 @@ body {
   flex-wrap: wrap;
   gap: 20px;
 }
+.res-container a {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+}
 .top-rated-btn {
   cursor: pointer;
   border: none;
