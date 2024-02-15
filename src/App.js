@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import About from "./components/About";
+import ContactUs from "./components/ContactUs";
 
 // const parent = React.createElement(
 //   "div",
@@ -80,8 +83,24 @@ const AppLayout = () => {
     </div>
   );
 };
+// takes list of paths
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <ContactUs />,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+// root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter} />);
 
 // STARTING OF THE FUNDAMENTALS OF THE REACT
