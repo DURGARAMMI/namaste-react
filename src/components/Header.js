@@ -2,6 +2,7 @@ import { LOGO_URL } from "../../src/utils/constants";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import ContactUs from "./ContactUs";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
   const [btnNameAuth, setBtnNameAuth] = useState("Login");
@@ -16,13 +17,17 @@ const Header = () => {
     console.log("Header useEffect Called");
   }, []);
 
+  const onlineStatus = useOnlineStatus()
   return (
-    <div className="header">
+    <div className="flex justify-between shadow-md mb-5 bg-red-400 align-middle">
       <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+        <img className="w-32" src={LOGO_URL} />
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex p-4 m-4 gap-5">
+          <li>
+            Online Status : {onlineStatus ? "Online" : "Offline"}
+          </li>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -34,6 +39,9 @@ const Header = () => {
           </li>
           <li>
             <Link to="/cart">Cart</Link>
+          </li>
+          <li>
+            <Link to="/grocery">Grocery</Link>
           </li>
           <button
             className="btn btn-login"

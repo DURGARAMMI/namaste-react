@@ -5,7 +5,7 @@ const styleCard = {
   backgroundColor: "rgb(253 244 244)",
 };
 const RestaurantsCard = (props) => {
-  // const { resName, cuisines } = props;
+  // const { resName, cuisines } = props; 
 
   const { resData } = props;
   if (!resData || !resData.info) {
@@ -19,10 +19,11 @@ const RestaurantsCard = (props) => {
   // console.log(props);
 
   return (
-    <div className="res-card" style={styleCard}>
-      <img alt={name} src={urlImage} />
-      <h3>{name}</h3>
-      <h4>{id}</h4>
+    <div className="res-card m-4 p-4 w-[250px] h-[95%] flex flex-col hover:text-[white] rounded-md bg-pink-100 hover:bg-pink-400" >
+      {/* style={styleCard} */}
+      <img alt={name} src={urlImage} className="h-[200] object-cover rounded-md" />
+      <h3 className="font-extrabold py-2 text-xl text-[purple] ">{name}</h3>
+      {/* <h4>{id}</h4> */}
       <h4>{cuisines.join(", ")}</h4>
       <h4>{avgRating} stars</h4>
       <h4>{costForTwo}</h4>

@@ -57,19 +57,18 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter filter-container">
-        <div className="search">
-          <label>Seach Restaurant:</label>
-          <br></br>
+      <div className="filter filter-container flex items-baseline m-4 justify-between">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="search-box border border-solid border-black mr-1"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
+            className="px-1 bg-green-300"
             onClick={() => {
               console.log(searchText);
               const filteredRestaurant = listOfRestaurants.filter((res) =>
@@ -84,9 +83,9 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div>
+        <div className="flex items-center">
           <button
-            className="top-rated-btn"
+            className="top-rated-btn bg-gray-200 mr-2 px-4 py-2 rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4
@@ -95,10 +94,10 @@ const Body = () => {
               setFilteredRestaurant(filteredList);
             }}
           >
-            Top Rated |
+            Top Rated
           </button>
           <button
-            className="top-rated-btn"
+            className="top-rated-btn bg-gray-200 px-4 py-2 rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.sla?.deliveryTime < 30
@@ -111,7 +110,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap justify-center">
         {/* <RestaurantsComp resName="Meghana Foods" cuisines="Asian, Fast Food" /> */}
         {/* <RestaurantsComp resData={resList[0]} />
           <RestaurantsComp resData={resList[1]} />
