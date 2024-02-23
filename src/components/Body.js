@@ -1,16 +1,24 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withOpenedLabel } from "./RestaurantCard";
 // import resList from "../utils/mockData";
 // import resList2 from "../utils/mockData2";
 import Shimmer from "./Shimmer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurant, setFilteredRestaurant] = useState("");
+
+  //whenever state variable is update, react triggers a recounciliation cycle(re-renders the component)
+
+  console.log("Body Render", listOfRestaurants)
+
+  const RestaurantCardopened = withOpenedLabel(RestaurantCard);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -51,6 +59,8 @@ const Body = () => {
     return <h1 style={{ color: "red" }}>Offline</h1>
   }
   // else { return <h2 style={{ color: "green" }}>Online</h2> }
+
+  const { loggedInUser, setUserName } = useContext(UserContext)
 
 
   return listOfRestaurants.length === 0 ? (
@@ -109,19 +119,32 @@ const Body = () => {
             Early
           </button>
         </div>
+
+        <div className="flex items-center">
+          <label>USER</label>
+          <input type="text" className="border-black-100 p-2 m-2 border-2"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value)
+            }}
+          ></input>
+        </div>
       </div>
+
       <div className="res-container flex flex-wrap justify-center">
         {/* <RestaurantsComp resName="Meghana Foods" cuisines="Asian, Fast Food" /> */}
         {/* <RestaurantsComp resData={resList[0]} />
           <RestaurantsComp resData={resList[1]} />
           <RestaurantsComp resData={resList[2]} /> */}
         {filteredRestaurant.map((restaurant) => (
-          <Link to={"/restaurants/" + restaurant.info.id} key={restaurant.info.id}>
-            <RestaurantCard resData={restaurant} />
+          < Link to={"/restaurants/" + restaurant.info.id} key={restaurant.info.id} >
+            {/* higherorder component */}
+            {restaurant.info.isOpen ? (<RestaurantCardopened resData={restaurant} />) : (<RestaurantCard resData={restaurant} />)}
           </Link>
+
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -2,6 +2,8 @@
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import RestaurantCategory from "./RestaurantCategory"
 
 const RestaurantMenu = () => {
   // const [resInfo, setResInfo] = useState(null);
@@ -10,6 +12,7 @@ const RestaurantMenu = () => {
   // console.log(params)
   const resInfo = useRestaurantMenu(resId)
 
+  const [showIndex, setShowIndex] = useState(null);
   // useEffect(() => {
   //   fetchMenu();
   // }, []);
@@ -25,13 +28,18 @@ const RestaurantMenu = () => {
   // const { name, cuisines } = resInfo?.cards[0]?.card?.card?.info;
   // Ensure that resInfo is not null and all nested properties exist before destruturing
   // const { name } = resInfo?.cards[0]?.card?.card?.info;
-  const { name, cuisines, costForTwoMessage, avgRating } = resInfo?.cards[0]?.card?.card?.info || {};
+  const { name, cuisines, costForTwoMessage, avgRating } = resInfo?.cards[2]?.card?.card?.info || {};
+  // console.log("resinfo", resInfo)
   // const name = resInfo?.cards[0]?.card?.card?.info.name;
   // const cuisines = resInfo?.cards[0]?.card?.card?.info?.cuisines || [];
   // const costForTwoMessage = resInfo?.cards[0]?.card?.card?.info?.costForTwoMessage || "";
   // const avgRating = resInfo?.cards[0]?.card?.card?.info?.avgRating || "";
-  console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1].card?.card)
+  // console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1].card?.card)
   const { itemCards } = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1].card?.card;
+  // console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
+
+  const categories = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => c.card?.card?.["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
+  // console.log("categories", categories)
 
   // resInfo === null ? (
   //   <Shimmer />
@@ -39,21 +47,31 @@ const RestaurantMenu = () => {
 
 
   return (
-    <div className="menu" >
+    <div className="menu text-center" >
       <br />
-      <h1>{name}</h1>
+      <h1 className="font-bold text-2xl">{name}</h1>
       <br />
-      {/* <h3>{cuisines.join(", ")} {costForTwoMessage} - Rating: {avgRating}</h3> */}
+      <h3>{cuisines.join(", ")}, {costForTwoMessage} - Rating: {avgRating}</h3>
 
       <br />
-      <h2>Menu</h2>
+
+      {categories.map((category, index) =>
+        <RestaurantCategory
+          key={category?.card?.card.title}
+          data={category?.card?.card}
+          showItems={index === showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
+        //showing index itself - accordion functionality
+        />
+      )}
+      {/* <h2>Menu</h2>
       <br />
       <ul>
         {
           itemCards?.map((item) =>
             <li key={item.card.info.id}>{item.card.info.name} - {"Rs."}{item.card.info.price / 100 || item.card.info.defaultPrice / 100 || item.card.info.finalPrice / 100}</li>)
         }
-      </ul>
+      </ul> */}
     </div >
   );
 };

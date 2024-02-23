@@ -1,8 +1,9 @@
 import { LOGO_URL } from "../../src/utils/constants";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 // import ContactUs from "./ContactUs";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [btnNameAuth, setBtnNameAuth] = useState("Login");
@@ -13,10 +14,13 @@ const Header = () => {
   // if dependency array is not there?
   // if dependency array is [] empty?
   // if dependency array is [btnNameAuth]?
-  useEffect(() => {
-    console.log("Header useEffect Called");
-  }, []);
+  // useEffect(() => {
+  //   console.log("Header useEffect Called");
+  // }, []);
 
+  const { loggedInUser } = useContext(UserContext);
+  console.log(loggedInUser)
+  //customhook
   const onlineStatus = useOnlineStatus()
   return (
     <div className="flex justify-between shadow-md mb-5 bg-red-400 align-middle">
@@ -53,6 +57,9 @@ const Header = () => {
           >
             {btnNameAuth}
           </button>
+          <li className="font-bold">
+            {loggedInUser}
+          </li>
         </ul>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,7 @@ import About from "./components/About";
 import ContactUs from "./components/ContactUs";
 import ErrorComp from "./components/ErrorComp";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -81,11 +82,22 @@ const Grocery = lazy(() => import("./components/Grocery"));
 // );
 
 const AppLayout = () => {
+
+  const [userName, setUserName] = useState()
+  //authentication
+  useEffect(() => {
+    const data = {
+      name: "Ramesh"
+    }
+    setUserName(data.name)
+  }, [])
   return (
-    <div className="apps">
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="apps">
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 // takes list of paths

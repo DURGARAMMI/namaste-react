@@ -1,13 +1,17 @@
 // const RestaurantsComp = (props) =>
 //const RestaurantsComp = ({ resName, cuisines })
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const styleCard = {
   backgroundColor: "rgb(253 244 244)",
 };
 const RestaurantsCard = (props) => {
   // const { resName, cuisines } = props; 
+  const { loggedInUser } = useContext(UserContext);
 
   const { resData } = props;
+
   if (!resData || !resData.info) {
     return null; // or handle the case where resData is not available
   }
@@ -28,8 +32,21 @@ const RestaurantsCard = (props) => {
       <h4>{avgRating} stars</h4>
       <h4>{costForTwo}</h4>
       <h4>{sla?.deliveryTime} mns</h4>
+      <h4>user: {loggedInUser}</h4>
     </div>
   );
 };
+
+export const withOpenedLabel = (RestaurantsCard) => {
+  //higher order componenent
+  return (props) => {
+    return (
+      <div>
+        <h2 className="bg-slate-400 w-[80px] text-white px-3 absolute">opened</h2>
+        <RestaurantsCard {...props} />
+      </div>
+    )
+  }
+}
 
 export default RestaurantsCard;
