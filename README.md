@@ -24,3 +24,17 @@
 - Header -> logo, nav items
 - Body -> restuarants, cards
 - Footer -> copy right, address, link
+
+# React Hooks:
+
+- useState() -> super powerful variable in react
+- useEffect()
+
+# Redux Toolkit
+
+- install 1. redux @reduxjs/toolkit and 2. install react-redux
+  -build our store
+  -connect our store to our app
+  -create a cart slice
+- Click on button -> dispatches an action -> which calls the reducer function -> and which updates the state
+- read the data using selector

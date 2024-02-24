@@ -10,7 +10,11 @@ const ItemList = ({ items }) => {
                     <img src={CDN_URL + item.card.info.imageId} className="w-14" />
                     <span className="mr-2">{item?.card?.info?.name}</span>
                 </div>
-                <span> - Rs.{item?.card?.info?.price ? item?.card?.info?.price / 100 : item?.card?.info?.defaultPrice / 100}</span>
+                <div className="flex gap-2">
+                    <span> - Rs.{item?.card?.info?.price ? item?.card?.info?.price / 100 : item?.card?.info?.defaultPrice / 100}</span>
+                    <button className="bg-white rounded-lg shadow-md text-black p-2">Add+</button>
+                </div>
+
             </div>
             {/* <p>{item?.card?.info?.description}</p> */}
         </div>))}
