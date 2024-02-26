@@ -22,14 +22,14 @@ class About extends Component {
             {({ loggedInUser }) => <h1 className="ml-2">{loggedInUser}</h1>}
           </UserContext.Consumer>
         </div>
-        <h2>This is Namaste React Web Series</h2>
+        {/* <h2>This is Namaste React Web Series</h2> */}
         {/* <User name={"This is Functional Component!"} /> */}
         {/* <UserClass name={"This is Class Component!"} location={"Hyderabad Class"} /> */}
-        {/* <ProximityAlert coordinates1={{ lat: 18, lng: 79 }} /> */}
+        {/* <ProximityAlert coordinates1={{ lat: 17.436582, lng: 78.397036 }} /> */}
 
 
         {/* <UserClass name={"This is Class Component!"} location={"Hyderabad Class"} /> */}
-        <UserClass name={"This is Class Component!"} location={"Hyderabad Class"} />
+        {/* <UserClass name={"This is Class Component!"} location={"Hyderabad Class"} /> */}
       </div>
     );
   }

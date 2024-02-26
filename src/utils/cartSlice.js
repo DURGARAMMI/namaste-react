@@ -4,7 +4,7 @@ const cartSlice = createSlice({
     name: "cart",
     initialState: {
         //empty store/cart
-        items: ["burger", "pizza"],
+        items: [],
     },
     reducers: {
         //reducer function
@@ -16,7 +16,9 @@ const cartSlice = createSlice({
             state.items.pop(); // remove item
         },
         clearCart: (state) => {
-            state.items.length = 0;
+            state.items.length = 0; //originalState = []
+
+            //return {items:[]}
         },
     },
 });
